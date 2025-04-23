@@ -28,6 +28,16 @@ public class Library {
 		return null;
 	}
 	
+	public Book findBookByAuthor(String author) {
+		for(Book book : books) {
+			if(book.getAuthor().contentEquals(author)) {
+				return book;
+			}
+		}
+		return null;
+	}
+	
+	
 	// ¥Î√‚
 	public boolean checkOutBook(String isbn) {
 		for(Book book : books) {
