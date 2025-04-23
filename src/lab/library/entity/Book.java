@@ -1,4 +1,4 @@
-package workshop.library.entity;
+package lab.library.entity;
 
 public class Book {
 	private String title;
@@ -13,7 +13,6 @@ public class Book {
 	}
 
 	public Book(String title, String author, String isbn, int publishYear) {
-		super();
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;

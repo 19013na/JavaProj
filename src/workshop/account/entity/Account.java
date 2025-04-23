@@ -1,14 +1,29 @@
 package workshop.account.entity;
 
+import workshop.account.exception.InsufficientBalanceException;
+
 public class Account {
 	private String custId;
 	private String acctId;
 	private int balance;
 	
+	// Default constructor
+	public Account() {
+		System.out.println("Default Constructor Called...");
+	}
+
+	// Constructor Overloading(생성자 중복정의)
+	public Account(String custId, String acctId, int balance) {
+		this.custId = custId;
+		this.acctId = acctId;
+		this.balance = balance;
+	}
+	
 	// setter
 	public void setCustId(String custId) {
 		this.custId = custId;
 	}
+
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
@@ -33,11 +48,21 @@ public class Account {
 	}
 	
 	// 출금 
-	public void withdraw(int amount) {
+	public void withdraw(int amount) throws InsufficientBalanceException{
 		if(amount > balance) {
-			System.out.println("잔액부족");
+			// InsufficientBalanceException 강제로 발생시켜야 함
+			String errMessage = String.format("잔액이 부족합니다. (요청 금액 : %d, 현재 잔액 : %d)", amount, balance);
+			throw new InsufficientBalanceException(errMessage);
 		} else {
 			this.balance -= amount;
 		}
+	}
+	
+	// 부모 클래스가 가진 Object의 totring() 메소드를 재정의(Overriding)
+	@Override
+	public String toString() {
+		return "Account [custId=" + custId 
+				+ ", acctId=" + acctId 
+				+ ", balance=" + balance + "]";
 	}
 }

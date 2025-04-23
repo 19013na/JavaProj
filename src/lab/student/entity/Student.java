@@ -1,30 +1,31 @@
-package Task;
+package lab.student.entity;
 
 public class Student {
 	private String studentId;
 	private String name;
 	private String major;
 	private int grade;
+	
+	public Student(String studentId, String name, String major, int grade) {
+		this.studentId = studentId;
+		this.name = name;
+		this.major = major;
+		this.grade = grade;
+	}
+
+	// getter, setter
 	public String getStudentId() {
 		return studentId;
 	}
 	
-	// getter, setter
-	public void setStudentId(String studentId) {
-		this.studentId = studentId;
-	}
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 	public String getMajor() {
 		return major;
 	}
-	public void setMajor(String major) {
-		this.major = major;
-	}
+	
 	public int getGrade() {
 		return grade;
 	}
@@ -36,18 +37,8 @@ public class Student {
 		}
 	}
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return name + " / " + major + " / " + grade + "ÇÐ³â";
-	}
-	
-	public static void main(String[] args) {
-		Student std1 = new Student();
-		std1.setName("±è¹Î¼ö");
-		std1.setMajor("ÄÄÇ»ÅÍ°øÇÐ");
-		std1.setGrade(3);
-		System.out.println(std1.toString());
-		std1.setGrade(5);
-	}
-
+	}*/
 }
