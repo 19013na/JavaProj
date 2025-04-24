@@ -3,8 +3,6 @@ import workshop.animal.entity.*;
 
 public class AnimalTest {
 	
-	
-	
 	public static void main(String[] args) {
 		// Cat 객체를 생성하는 3가지 방법
 		Cat cat1 = new Cat();	// 5개 함수 호출 가능

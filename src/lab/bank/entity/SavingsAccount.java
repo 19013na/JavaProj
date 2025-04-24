@@ -18,4 +18,8 @@ public class SavingsAccount extends Account {
 		deposit(newBalance);
 	}
 
+	@Override
+	public String toString() {
+		return super.toString() + String.format(", ÀÌÀÚÀ²: %.1f%%", interestRate * 100);
+	}
 }

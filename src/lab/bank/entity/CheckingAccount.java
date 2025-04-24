@@ -21,8 +21,12 @@ public class CheckingAccount extends Account {
 	public void withdraw(double amount) throws InsufficientBalanceException, WithdrawalLimitExceededException{
 		if (withdrawalLimit < amount) {
 			throw new WithdrawalLimitExceededException("출금 한도 초과 되었습니다. (출금 한도 금액 : " + withdrawalLimit + ")");
-		} else {
-			super.withdraw(amount);
 		}
+		super.withdraw(amount);
+	}
+	
+	@Override
+	public String toString() {
+	    return super.toString() + String.format(", 출금 한도: %.1f원", withdrawalLimit);
 	}
 }

@@ -42,8 +42,6 @@ public class Account {
 	
 	@Override
 	public String toString() {
-		return super.toString();
+	    return String.format("계좌번호: %s, 소유자: %s, 잔액: %.1f원", accountNumber, ownerName, initialBalance);
 	}
-	
-
 }
