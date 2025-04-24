@@ -1,6 +1,4 @@
-package lab.library.entity;
-
-import workshop.book.entity.Publication;
+package workshop.book.entity;
 
 public class ReferenceBook extends Publication {
 	private String field;
@@ -8,7 +6,7 @@ public class ReferenceBook extends Publication {
 	public ReferenceBook() {
 	}
 
-	public ReferenceBook(String title, String publishingDate, int page, int price) {
+	public ReferenceBook(String title, String publishingDate, int page, int price, String field) {
 		super(title, publishingDate, page, price);
 		this.field = field;
 	}
