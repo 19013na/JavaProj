@@ -16,17 +16,22 @@ public class BankDemo {
 		System.out.println("==================");
 		
 		System.out.println("=== 입금/출금 테스트 ===");
-		bankA.deposit("AC1000", 5000);
-		bankA.withdraw("AC1000", 3000);
+		bankA.deposit("AC0000", 5000);
+		bankA.withdraw("AC0001", 3000);
 		
 		System.out.println("=== 이자 적용 테스트 ===");
+		bankA.printSavingAccount();
 		
 		System.out.println("=== 계좌 이체 테스트 ===");
+		bankA.transfer("AC0002", "AC0001", 5000);
 		
 		System.out.println("=== 모든 계좌 목록 ===");
 		bankA.printAllAccounts();
-		System.out.println("==================");
 		
+		System.out.println("==================");
+		bankA.withdraw("AC0001", 6000);
+		bankA.withdraw("AC0012", 3000);
+	
 	}
 
 }

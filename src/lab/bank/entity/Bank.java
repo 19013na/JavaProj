@@ -41,60 +41,74 @@ public class Bank {
         return accountNumber;
 	}
 	
-	public Account findAccount(String accountNumber) {
+	public Account findAccount(String accountNumber) throws AccountNotFoundException{
 		for(Account account : accounts) {
 			if(account.getAccountNumber().equals(accountNumber)) {
 				return account;
 			}
 		}
-		return null;
+		throw new AccountNotFoundException("계좌번호 " + accountNumber +"에 해당하는 계좌를 찾을 수 없습니다.");	
 	}
 	
 	// 입금
 	public void deposit(String accountNumber, double amount) {
-		Account account = findAccount(accountNumber);
-		account.deposit(amount);
-		System.out.println(amount + "원이 입금되었습니다. 현재 잔액: " + account.getinitialBalance() + "원 ");
+		try {
+			Account account = findAccount(accountNumber);
+			account.deposit(amount);
+			System.out.println(amount + "원이 입금되었습니다. 현재 잔액: " + account.getinitialBalance() + "원 ");
+		}catch (AccountNotFoundException e) {
+	    	System.out.println("예외 발생 : " + e.getMessage());
+	    }
 	}
 	
 	// 출금
 	public void withdraw(String accountNumber, double amount) {
-	    Account account = findAccount(accountNumber);
-	    if (account != null) {
-	        try {
-	            account.withdraw(amount);
-	        	System.out.println(amount + "원이 출금되었습니다. 현재 잔액: " + account.getinitialBalance() + "원 ");
-	        } catch (InsufficientBalanceException | WithdrawalLimitExceededException e) {
+	    try {
+	    	Account account = findAccount(accountNumber);    
+	    	account.withdraw(amount);
+	        System.out.println(amount + "원이 출금되었습니다. 현재 잔액: " + account.getinitialBalance() + "원 ");
+	    }catch (AccountNotFoundException e) {
+	    	System.out.println("예외 발생 : " + e.getMessage());
+	    }catch (InsufficientBalanceException | WithdrawalLimitExceededException e) {
 	            System.out.println("예외 발생: " + e.getMessage());
-	        }
-	    } else {
-	        System.out.println("예외 발생: 계좌번호 " + accountNumber + "에 해당하는 계좌를 찾을 수 없습니다.");
 	    }
 	}
 	
-	public void transfer(String fromAccountNumber, String toAccountNumber, double amount) throws AccountNotFoundException{
-		Account fromAccount = findAccount(fromAccountNumber);
-		Account toAccount = findAccount(toAccountNumber);
-		
-		if(fromAccount != null && toAccount != null) {
-			try {
-				fromAccount.withdraw(amount);
-				toAccount.deposit(amount);
-			}catch(InsufficientBalanceException | WithdrawalLimitExceededException e) {
-				System.out.println("이체 실패 : " + e.getMessage());
-			}
-		} else {
-			throw new AccountNotFoundException("계좌를 찾을 수 없습니다.");
+	public void transfer(String fromAccountNumber, String toAccountNumber, double amount){	
+		try {
+			Account fromAccount = findAccount(fromAccountNumber);
+			Account toAccount = findAccount(toAccountNumber);
+			
+			fromAccount.withdraw(amount);
+			toAccount.deposit(amount);
+			
+			System.out.println(amount + "원이 출금되었습니다. 현재 잔액: " + fromAccount.getinitialBalance() + "원");
+			System.out.println(amount + "원이 입금되었습니다. 현재 잔액: " + toAccount.getinitialBalance() + "원");
+			System.out.println(amount + "원이 " + fromAccountNumber + "에서 " + toAccountNumber + "로 송금되었습니다.");
+		}catch(AccountNotFoundException e) {
+			System.out.println("예외 발생 : " + e.getMessage());
+		}catch(InsufficientBalanceException | WithdrawalLimitExceededException e) {
+			System.out.println("예외 발생 : " + e.getMessage());
 		}
 	}
 	
 	public void printAllAccounts() {
 		for(Account account : accounts) {
-			account.toString();
+			System.out.println(account.toString());
 		}
 	}
 	
 	private String generateAccountNumber() {
 		return String.format("AC%04d", nextAccountNumber++);
+	}
+	
+	public void printSavingAccount() {
+		for (Account acc : accounts) {
+            if (acc instanceof SavingsAccount) {
+                SavingsAccount savingsAccount = (SavingsAccount) acc;
+                savingsAccount.applyInterest();
+                System.out.println("이자 " + savingsAccount.getInterestRate() * savingsAccount.getinitialBalance() + "원이 적용되었습니다. 현재 잔액: " + savingsAccount.getinitialBalance() + "원");
+            }
+        }
 	}
 }
