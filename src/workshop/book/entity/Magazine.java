@@ -18,10 +18,6 @@ public class Magazine extends Publication{
 	
 	@Override
 	public void setPublishingDate(String publishingDate) {
-		// TODO Auto-generated method stub
 		super.setPublishingDate(publishingDate);
 	}
-	
-	
-	
 }

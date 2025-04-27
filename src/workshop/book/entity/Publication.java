@@ -49,7 +49,7 @@ public class Publication {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Publication [title=" + title + ", publishingDate=" + publishingDate + ", page=" + page + ", price="
