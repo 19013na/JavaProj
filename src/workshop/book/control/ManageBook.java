@@ -17,8 +17,9 @@ public class ManageBook {
 		pubs[3] = new Novel("남한산성","2007-04-14",383,11000,"김훈","대하소설");
 		pubs[4] = new ReferenceBook("실용주의프로그래머","2007-01-14",496,25000,"소프트웨어공학");
 		
+		int index=1;
 		for (Publication publication : pubs) {
-			System.out.println(publication);
+			System.out.println(index++ + " " + publication.toString());
 		}
 		
 		System.out.println("=== 가격변경 전 ===");
@@ -31,13 +32,17 @@ public class ManageBook {
 		for(Publication publication : pubs) {
 			printSubInfo(publication);
 		}
-		
+	
 		// Magazine 객체 생성
 		//Magazine mz = new Magazine(); // -> (x)
 		//Publication pub = new Magazine();
 		
 		// Novel 객체 생성 : alt + shift + l
 		//Publication pub2 = new Novel();
+		
+		// 통계 분석 실행
+		StatisticsAnalyzer analyzer = new StatisticsAnalyzer();
+        analyzer.printStatistics(pubs);
 	}
 	
 	// 하위(Sub) 클래스들이 단독으로 가지고 있는 정보를 출력하는 메서드
